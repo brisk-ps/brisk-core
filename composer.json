@@ -1,0 +1,42 @@
+{
+    "name": "brisk-ps/brisk-core",
+    "description": "Brisk Core",
+    "keywords": [
+        "mohammedfuad97",
+        "brisk",
+        "brisk-ps",
+        "brisk-core",
+        "laravel",
+        "php",
+        "jquery"
+    ],
+    "homepage": "https://github.com/brisk-ps/brisk-core",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mohammed F. Ouda",
+            "email": "mhmdowda@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": ">=5.4"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "BriskPs\\BriskCore\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\BriskPs\\BriskCore\\BriskCoreServiceProvider"
+            ]
+        }
+    }
+}
