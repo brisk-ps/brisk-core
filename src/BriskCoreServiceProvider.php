@@ -7,16 +7,13 @@ use Illuminate\Support\ServiceProvider;
 class BriskCoreServiceProvider extends ServiceProvider{
 
     public function boot(){
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('brisk-core.php'),
-            ], 'config');
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/brisk'),
-            ], 'assets');*/
-        }
+        $this->publishes([
+            __DIR__.'/../config/config.php' => config_path('brisk-core.php'),
+        ], 'config');
+        
+        $this->publishes([
+            __DIR__.'/../resources/assets' => public_path('vendor/brisk-core'),
+        ], 'public');
     }
 
     public function register(){
