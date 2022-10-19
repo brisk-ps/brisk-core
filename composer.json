@@ -21,8 +21,9 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
-        "illuminate/support": ">=5.4"
+        "php": ">=7.0",
+        "illuminate/support": ">=5.4",
+        "illuminate/http": "*"
     },
     "config": {
         "sort-packages": true

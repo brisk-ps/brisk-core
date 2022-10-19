@@ -239,9 +239,19 @@
                     }
 
                     if($this.hasClass('select2')){
-                        $this.select2({
-                            allowClear: true
-                        });
+                        // $this.select2({
+                        //     allowClear: true,
+                        //     placeholder: ($this.is('[data-placeholder]') && $.trim($this.attr('data-placeholder')) !== "" ? $this.attr('data-placeholder') : ""),
+                        // });
+                    //     $this.select2({
+                    //         width: '100%',
+                    //         allowClear: !$this.prop('required'),
+                    //         language: {
+                    //            noResults: function () {
+                    //                return "{{ __('No results found') }}";
+                    //            }
+                    //        }
+                    //    });
                     }else{
                         if($this.is('[data-placeholder]')){
                             $this.prepend("<option selected disabled>" + $this.attr('data-placeholder') + "</option>");

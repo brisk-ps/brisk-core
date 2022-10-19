@@ -143,24 +143,46 @@
                 var internalSettings = $this.data('briskFormSettings');
 
                 $this.attr('class', 'modal fade fill-in');
+                $this.attr('tabindex', "-1");
                 $this.attr('role', 'dialog');
                 $this.attr('aria-hidden', 'true');
 
                 var template_html = '';
 
-                template_html += '    <div class="modal-dialog brisk-form" role="document">';
-                template_html += '        <div class="modal-content">';
-                template_html += '            <div class="modal-header py-2">';
-                template_html += '                <h4 class="modal-title"></h4>';
-                template_html += '                <button type="button" class="close" data-dismiss="modal">×</button>';
+                // template_html += '    <div class="modal-dialog brisk-form" role="document">';
+                // template_html += '        <div class="modal-content">';
+                // template_html += '            <div class="modal-header py-2">';
+                // template_html += '                <h4 class="modal-title"></h4>';
+                // template_html += '                <button type="button" class="close" data-dismiss="modal">×</button>';
+                // template_html += '            </div>';
+                // template_html += '            <div class="modal-alerts"></div>';
+                // template_html += '            <form role="form" autocomplete="off">';
+                // template_html += '                <div class="modal-body"></div>';
+                // template_html += '                <div class="modal-footer sm-text-center">';
+                // template_html += '                    <button type="submit" class="btn btn-primary btn-block fs-15">حفظ البيانات</button>';
+                // template_html += '                    <button type="reset" class="d-none">Reset</button>';
+                // template_html += '                </div>';
+                // template_html += '            </form>';
+                // template_html += '        </div>';
+                // template_html += '    </div>';
+
+                template_html += '    <div class="modal-dialog modal-dialog-centered brisk-form" role="document" style="max-width: 500px">';
+                template_html += '        <div class="modal-content position-relative">';
+                template_html += '            <div class="position-absolute top-0 end-0 mt-2 me-2 z-index-1">';
+                template_html += '                <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>';
                 template_html += '            </div>';
-                template_html += '            <div class="modal-alerts"></div>';
-                template_html += '            <form role="form" autocomplete="off">';
-                template_html += '                <div class="modal-body"></div>';
-                template_html += '                <div class="modal-footer sm-text-center">';
-                template_html += '                    <button type="submit" class="btn btn-primary btn-block fs-15">حفظ البيانات</button>';
-                template_html += '                    <button type="reset" class="d-none">Reset</button>';
+                template_html += '            <form autocomplete="off">';
+                template_html += '            <div class="modal-body p-0">';
+                template_html += '               <div class="rounded-top-lg py-3 ps-4 pe-6 bg-light">';
+                template_html += '                    <h4 class="mb-1 modal-title"></h4>';
                 template_html += '                </div>';
+                template_html += '                <div class="p-4 pb-0 brisk-form-fields"></div>';
+                template_html += '            </div>';
+                template_html += '            <div class="modal-footer">';
+                template_html += '                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">إغلاق</button>';
+                template_html += '                <button class="btn btn-primary" type="submit">حفظ البيانات</button>';
+                template_html += '                <button class="d-none" type="reset">Reset</button>';
+                template_html += '            </div>';
                 template_html += '            </form>';
                 template_html += '        </div>';
                 template_html += '    </div>';
@@ -242,7 +264,7 @@
                     }
 
                     $.each(response.inputs, function(key, record) {
-                        $this.find('.modal-body').append(internalFunctions.formatter.call($this[0], key, record));
+                        $this.find('.brisk-form-fields').append(internalFunctions.formatter.call($this[0], key, record));
                     });
 
                     if(internalSettings.title == ""){
@@ -259,7 +281,7 @@
                         }
                         
                         try {
-                            GLOBALS.lists[$(this).attr('data-options_source')](this);
+                            GLOBALS.lists[$(this).attr('data-options_source')](this, $this);
                         } catch (error) {
                             console.error("[BriskForm]: lists[$(this).attr('data-options_source')](this): " + $(this).attr('data-options_source'));
                         }
@@ -291,7 +313,7 @@
                         }
     
                         $.each(response.inputs, function(key, record) {
-                            $this.find('.modal-body').append(internalFunctions.formatter.call($this[0], key, record));
+                            $this.find('.brisk-form-fields').append(internalFunctions.formatter.call($this[0], key, record));
                         });
     
                         if(internalSettings.title == ""){
