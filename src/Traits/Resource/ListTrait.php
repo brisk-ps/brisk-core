@@ -4,9 +4,9 @@ namespace BriskPs\BriskCore\Traits\Resource;
 
 use Illuminate\Http\Request;
 
-trait IndexTrait {
+trait ListTrait {
 
-    public function index(Request $request){
+    public function list(Request $request){
         $response = $this->model::select('*');
         
         if(in_array('scopeActive', get_class_methods($this->model))){
