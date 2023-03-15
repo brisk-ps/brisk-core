@@ -22,11 +22,23 @@ trait ModelTrait {
 
             // array_push($rows[$this->$attributeMethod()["rowIndex"]], $this->$attributeMethod());
             
-            if(!isset($rows[$key])){
-                $rows[$key] = [];
-            }
+            $with_previous_row = isset($this->$attributeMethod()["with_previous_row"]) ? $this->$attributeMethod()["with_previous_row"] : false;
             
-            $rows[$key][] = $this->$attributeMethod();
+            if($with_previous_row){
+                if(!is_array($rows[array_key_last($rows)])){
+                    $previous_row = $rows[array_key_last($rows)];
+                    $rows[array_key_last($rows)] = [];
+                    $rows[array_key_last($rows)][] = $previous_row;
+                }
+
+                $rows[array_key_last($rows)][] = $this->$attributeMethod();
+            }else{
+                if(!isset($rows[$key])){
+                    $rows[$key] = [];
+                }
+                
+                $rows[$key][] = $this->$attributeMethod();
+            }
         }
 
         $response = [];

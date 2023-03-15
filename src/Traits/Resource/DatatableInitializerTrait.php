@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 trait DatatableInitializerTrait {
 
-    public function datatableInitializer(Request $request, $eloquent, $filters, $columns, $orderBy = [], $aggregations = []){
+    public function datatableInitializer(Request $request, $eloquent, $filters, $columns, $orderBy = [], $aggregations = [], $footer_info = "", $eloquent_append = []){
         if((int) $request->count) {
             return $eloquent->count();
         }
@@ -20,7 +20,9 @@ trait DatatableInitializerTrait {
         }
         
         if((int) trim($request->all)){
-            $data = ['data' => $eloquent->get()];
+            $data = $eloquent->get();
+            $data->append($eloquent_append);
+            $data = ['data' => $data];
         }else{
             $per_page = 10;
 
@@ -29,9 +31,10 @@ trait DatatableInitializerTrait {
             }
 
             $data = $eloquent->paginate($per_page);
+            $data->append($eloquent_append);
         }
 
-        $columns = collect(['filters' => $filters, 'table_title' => $this->title, 'columns' => $columns, 'footer' => ["info" => ""], 'aggregations' => $aggregations]);
+        $columns = collect(['filters' => $filters, 'table_title' => $this->title, 'columns' => $columns, 'footer' => ["info" => $footer_info], 'aggregations' => $aggregations]);
         $response = $columns->merge($data);
 
         return $response;
